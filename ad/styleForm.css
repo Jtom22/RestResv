@@ -1,0 +1,175 @@
+#icono{
+    /* height: 10%;
+    width: 10%; */
+    width: 25vh;
+
+    border-radius: 12px;
+    padding: 10px;
+     
+}
+#form{
+    background-size:5%;
+    font-size: 1rem;
+}
+
+#Titulo2{
+    font-size: 1.5vw;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+#hijo{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    background-image:linear-gradient(rgba(0, 0, 0, 0.199), rgba(0, 0, 0, 0.199));
+   
+    
+}
+#hijo:hover{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5%;
+    
+  
+}
+.floater{
+    float: left;
+    height: 50%;
+    width: 100%;
+    margin-bottom: -50px;
+}
+#gallary{
+    padding: 8vh;
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(../img/restau.jpg);
+    background-repeat:no-repeat;
+    background-position-x:center;
+    background-position-y:center;
+    background-size: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    font-size: 100%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 100%;
+}
+#about{
+
+    margin-bottom:0px;
+    background-image:linear-gradient(rgba(179, 174, 174, 0.205), rgba(185, 180, 180, 0.267)),url(../img/fondo.jpg);
+    background-repeat:no-repeat;
+    background-position-x:center;
+    background-position-y:center;
+    background-size: 100%;
+    color: rgb(19, 19, 19);
+    display: flex;
+    flex-direction: column;
+    height:100%;
+    font-size: 2vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: justify;
+    overflow: auto;
+}
+#testmonial{
+    background-color: white;
+    background-size: 100%;
+    margin:0px;
+
+}
+#criticas{
+    display: flex;
+    flex-flow: row;
+    color:black;
+    
+   
+
+}
+#home{
+    background-color: #3a3a3a;
+    color:rgb(255, 255, 255);
+}
+.reaparece{
+    filter:brightness(30%);
+
+}
+.reaparece:hover{
+    filter:brightness(100%);
+
+}
+.imagen{
+
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(../img/rest.jpg);
+    background-repeat:no-repeat;
+    background-position-x:center;
+    background-position-y:center;
+    background-size: 100%;
+    color: white;
+    height:100vh;
+    width: 100%;
+    padding-left: 1%;
+    
+}
+.centro-izqda{
+    float: left;
+    height: 50%;
+    width: 100%;
+    margin-bottom: -50px;
+}
+
+.centrar{
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+  
+
+} 
+.centrar2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+
+}
+.centrar3{
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+}
+
+.tarjeta{
+    background-color: rgb(255, 255, 255);
+    border: 5px;
+    border-radius: 3px;
+    border-color:"black";
+    padding:10px;
+
+}
+
+
+/* 
+333030 */
+
+li{
+    font-size: 2vh;
+}
+ul{
+    list-style-type: none;
+    justify-content: none ;
+}
+@media (min-width: 300px)  {
+    
+    #icono {max-width: 275px;}
+}
+@media(max-width:300px){
+    body{
+        font-size: 10px !important;
+    }
+}

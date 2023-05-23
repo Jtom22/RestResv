@@ -1,0 +1,135 @@
+
+.cajaFormulario{
+   
+    display: grid;
+    justify-content: center;
+    align-items: start;
+    height: 150%;
+    width:100%;
+    
+    
+
+}
+
+.Redes{
+    text-align: end;
+
+}
+/*#form{
+   
+    background-color: aliceblue;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+*/
+/*
+colors{
+        background-color: rgb(89, 193, 235);
+            background-color: rgb(0, 183, 255);
+
+}
+*/
+#icono{
+    /* height: 10%;
+    width: 10%; */
+    max-width: 300px;
+    border-radius: 12px;
+    padding: 10px;
+     
+}
+#enviar{
+    width: 50%;
+    height: 100%;
+    font-size: 2rem;
+    
+
+
+}
+#formulario{
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+
+    
+}
+
+#formulario1{
+    
+    border-color: rgb(89, 193, 235);
+    border-radius: 12px;
+    background-color: rgb(38, 42, 44);
+    padding:10px;
+    padding-right: 5px;
+    
+    
+
+   
+}
+#formulario2{
+    
+    border-color: rgb(89, 193, 235);
+    width: fit-content;
+    border-radius: 12px;
+    background-color: rgb(38, 42, 44);
+    padding:10px;
+    padding-left:5px
+  
+
+  
+}
+#part1  {
+   
+    display:grid;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+}
+#page{
+    background-color: rgb(152, 160, 163);
+    height: 65vh;
+
+   
+
+    
+}
+#footer{
+    height: fit-content;
+    background-color: rgb(38, 42, 44);
+    text-align: center;
+    color:white;
+    height: 10vh;
+   
+}
+#TituloForm{
+    font-size: 8rem;
+    font-family:fantasy;
+
+}
+body{
+    font-size: 2rem;
+
+}
+
+
+header{
+    height: 25vh;
+}
+
+
+  /* 
+    ##Device = Most of the Smartphones Mobiles (Portrait)
+    ##Screen = B/w 320px to 479px
+  */
+  
+@media (min-width: 576px)  {
+    
+    #icono {max-width: 200px;}
+}
+
+
+
