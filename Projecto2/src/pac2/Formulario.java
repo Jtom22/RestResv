@@ -285,7 +285,7 @@ public class Formulario extends JFrame {
 										        	String Query = "INSERT INTO "+NombreDBC+"(id, usuario, Contraseña) VALUES (NULL,'"+telefono+"','"+correo+"')";
 										        	CreaCliente(Query);
 										        	
-													JOptionPane.showMessageDialog(Formulario.this, "Creamos usuario");
+										        	JOptionPane.showMessageDialog(Formulario.this, "Creamos usuario");
 										        	
 
 													 Connection conec2=(Connection) conexion.MySQLConnect();
@@ -320,27 +320,27 @@ public class Formulario extends JFrame {
 														 JOptionPane.showMessageDialog(Formulario.this, "Creamos usuario");
 
 														 Connection conec2=(Connection) conexion.MySQLConnect();
-															 String Query4 = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado, id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','LLeno','"+telefono+"')";									
-															 Statement st2=conec.createStatement();
-															 st.executeUpdate(Query4);
-															 JOptionPane.showMessageDialog(Formulario.this, "No hay sufiente espacio en el restaurante seleccione otro turno o dia");
-												        	
+														 String Query4 = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado, id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','LLeno','"+telefono+"')";									
+														 Statement st2=conec.createStatement();
+														 st.executeUpdate(Query4);
+														 JOptionPane.showMessageDialog(Formulario.this, "No hay sufiente espacio en el restaurante seleccione otro turno o dia");
+											        	
 												      }else {
 															//insertamos solo reserva
 
-												        	 Connection conec=(Connection) conexion.MySQLConnect();
-															 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','LLeno','"+telefono+"')";									
-															 Statement st=conec.createStatement();
-															 st.executeUpdate(Query);
-															 JOptionPane.showMessageDialog(Formulario.this, "No hay sufiente espacio en el restaurante seleccione otro turno o dia");
+											        	 Connection conec=(Connection) conexion.MySQLConnect();
+														 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','LLeno','"+telefono+"')";									
+														 Statement st=conec.createStatement();
+														 st.executeUpdate(Query);
+														 JOptionPane.showMessageDialog(Formulario.this, "No hay sufiente espacio en el restaurante seleccione otro turno o dia");
 												        }
 													
 													 
 												}
 																					
 											} catch (SQLException ex) {
-										// TODO Auto-generated catch block
-										ex.printStackTrace();
+												// TODO Auto-generated catch block
+												ex.printStackTrace();
 								        	
 								        }
 						

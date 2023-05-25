@@ -24,7 +24,7 @@ class Menu extends JFrame
       
       JPanel panel = new JPanel();
       panel.setBackground(new Color(255, 255, 255));
-      panel.setBounds(0, 66, 510, 488);
+      panel.setBounds(0, 66, 489, 488);
       getContentPane().add(panel);
       panel.setLayout(null);
       
@@ -33,7 +33,7 @@ class Menu extends JFrame
       panel.add(list);
       
       JPanel panel_1 = new JPanel();
-      panel_1.setBounds(510, 66, 290, 488);
+      panel_1.setBounds(489, 66, 311, 488);
       getContentPane().add(panel_1);
       panel_1.setLayout(new GridLayout(0, 1, 0, 0));
       
@@ -88,6 +88,11 @@ class Menu extends JFrame
       panel_1.add(btnNewButton_4);
       btnNewButton_4.setForeground(Color.WHITE);
       btnNewButton_4.setBackground(Color.RED);
+      
+      JButton btnGestionarReservas = new JButton("gestionar reservas");
+      btnGestionarReservas.setForeground(Color.WHITE);
+      btnGestionarReservas.setBackground(Color.DARK_GRAY);
+      panel_1.add(btnGestionarReservas);
       
       JPanel panel_2 = new JPanel();
       panel_2.setBackground(new Color(255, 255, 255));
