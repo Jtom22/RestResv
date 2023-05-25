@@ -89,13 +89,13 @@ public class Formulario extends JFrame {
 			panel_3.setLayout(null);
 			
 			JLabel lblNewLabel_3 = new JLabel("Nombre");
-			lblNewLabel_3.setBounds(25, 17, 53, 25);
+			lblNewLabel_3.setBounds(25, 17, 93, 25);
 			panel_3.add(lblNewLabel_3);
 			lblNewLabel_3.setForeground(Color.WHITE);
 			lblNewLabel_3.setBackground(Color.WHITE);
 			
 			nombreTxt = new JTextField();
-			nombreTxt.setBounds(105, 0, 168, 58);
+			nombreTxt.setBounds(128, 0, 145, 58);
 			panel_3.add(nombreTxt);
 			nombreTxt.setHorizontalAlignment(SwingConstants.LEFT);
 			nombreTxt.setColumns(10);
@@ -109,13 +109,13 @@ public class Formulario extends JFrame {
 			panel_4.setLayout(null);
 			
 			JLabel lblNewLabel = new JLabel("Correo electronico");
-			lblNewLabel.setBounds(10, 24, 88, 14);
+			lblNewLabel.setBounds(10, 24, 109, 14);
 			panel_4.add(lblNewLabel);
 			lblNewLabel.setForeground(Color.WHITE);
 			lblNewLabel.setBackground(Color.DARK_GRAY);
 			
 			correoTxt = new JTextField();
-			correoTxt.setBounds(108, 0, 165, 62);
+			correoTxt.setBounds(129, 0, 144, 62);
 			panel_4.add(correoTxt);
 			correoTxt.setBackground(Color.WHITE);
 			correoTxt.setHorizontalAlignment(SwingConstants.LEFT);
@@ -130,13 +130,13 @@ public class Formulario extends JFrame {
 			panel_5.setLayout(null);
 			
 			JLabel lblNewLabel_5 = new JLabel("Nuemero de clientes");
-			lblNewLabel_5.setBounds(10, 24, 97, 14);
+			lblNewLabel_5.setBounds(10, 24, 125, 14);
 			panel_5.add(lblNewLabel_5);
 			lblNewLabel_5.setForeground(Color.WHITE);
 			lblNewLabel_5.setBackground(Color.DARK_GRAY);
 			
 			numClientesTxt = new JTextField();
-			numClientesTxt.setBounds(119, 0, 205, 62);
+			numClientesTxt.setBounds(145, 0, 179, 62);
 			panel_5.add(numClientesTxt);
 			numClientesTxt.setHorizontalAlignment(SwingConstants.LEFT);
 			numClientesTxt.setColumns(10);
@@ -150,13 +150,13 @@ public class Formulario extends JFrame {
 			panel_6.setLayout(null);
 			
 			JLabel lblNewLabel_1 = new JLabel("Fecha");
-			lblNewLabel_1.setBounds(38, 24, 29, 14);
+			lblNewLabel_1.setBounds(38, 24, 80, 14);
 			panel_6.add(lblNewLabel_1);
 			lblNewLabel_1.setForeground(Color.WHITE);
 			lblNewLabel_1.setBackground(Color.DARK_GRAY);
 			
 			fechaTxt = new JTextField();
-			fechaTxt.setBounds(119, 0, 205, 62);
+			fechaTxt.setBounds(144, 0, 180, 62);
 			panel_6.add(fechaTxt);
 			fechaTxt.setHorizontalAlignment(SwingConstants.LEFT);
 			fechaTxt.setColumns(10);
@@ -171,13 +171,13 @@ public class Formulario extends JFrame {
 			panel_7.setLayout(null);
 			
 			JLabel lblNewLabel_2 = new JLabel("Telefono");
-			lblNewLabel_2.setBounds(10, 24, 66, 14);
+			lblNewLabel_2.setBounds(10, 24, 90, 14);
 			panel_7.add(lblNewLabel_2);
 			lblNewLabel_2.setForeground(Color.WHITE);
 			lblNewLabel_2.setBackground(Color.DARK_GRAY);
 			
 			telefonoTxt = new JTextField();
-			telefonoTxt.setBounds(111, 0, 168, 62);
+			telefonoTxt.setBounds(130, 0, 149, 62);
 			panel_7.add(telefonoTxt);
 			telefonoTxt.setHorizontalAlignment(SwingConstants.LEFT);
 			telefonoTxt.setColumns(10);
@@ -191,13 +191,13 @@ public class Formulario extends JFrame {
 			panel_8.setLayout(null);
 			
 			JLabel lblNewLabel_4 = new JLabel("Numero de turno");
-			lblNewLabel_4.setBounds(10, 24, 84, 14);
+			lblNewLabel_4.setBounds(10, 24, 122, 14);
 			panel_8.add(lblNewLabel_4);
 			lblNewLabel_4.setForeground(Color.WHITE);
 			lblNewLabel_4.setBackground(Color.DARK_GRAY);
 			
 			turnoTxt = new JTextField();
-			turnoTxt.setBounds(121, 0, 203, 62);
+			turnoTxt.setBounds(142, 0, 182, 62);
 			panel_8.add(turnoTxt);
 			turnoTxt.setHorizontalAlignment(SwingConstants.LEFT);
 			turnoTxt.setColumns(10);
@@ -221,6 +221,7 @@ public class Formulario extends JFrame {
 			panel_1.add(IMAGEN);
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
 					//Comprobamos que los datos son correctos y creamos el usuario
 					String nombre =nombreTxt.getText();
 					String correo= correoTxt.getText();
@@ -228,7 +229,7 @@ public class Formulario extends JFrame {
 					String telefono = telefonoTxt.getText();
 					String numCli= numClientesTxt.getText();
 					String turno = turnoTxt.getText();
-
+					boolean existe;
 					boolean valido1=false;
 					char [] letras=correo.toCharArray();
 					System.out.println(letras);
@@ -244,53 +245,100 @@ public class Formulario extends JFrame {
 									Conexion db = new Conexion();
 							        db.MySQLConnect();
 							        String NombreDB = "reservas";
+							        String NombreDBC="clientes";
 									 Conexion conexion = new Conexion() ;
-									 Statement comando = null;
-									 ResultSet registro;
-									 PreparedStatement ps = null;
+
 									
 								    
 								     String fechaComoCadena="'"+fecha+"'";
 									 String Query2 = "SELECT SUM(`numero`) FROM `reservas` WHERE `fecha`=" +fechaComoCadena +"AND `turno`="+turno;
-									 SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+									 SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/dd/MM");
 									 Date fechaComoDate = null;
+									 //String Query3 = "SELECT * FROM `reservas` WHERE `id_cliente`= "+telefono;
+									 String Query3 = "SELECT usuario FROM `clientes` WHERE `usuario`= "+telefono;
+									  
 									try {
+										//Pasamos la fecha a formato date
 										fechaComoDate = sdfrmt.parse(fecha);
 									} catch (ParseException e1) {
 										// TODO Auto-generated catch block
 										e1.printStackTrace();
 									}
 								        try {
-											db.comando = db.conexion.createStatement();
-											db.registro = db.comando.executeQuery(Query2);
-											String resultado=String.valueOf(db.registro);
+								        	
+								        	//Comprobamos el numero de personas en una fecha determinada
+								        	String resultado=NumPersonasQuery(Query2);
 											
-											while (db.registro.next()) {
-												resultado=db.registro.getString(1);
-												//System.out.println(resultado);
-												if (resultado==null) {
-													resultado="0";
-												}
-											}
+
+											//Conexion a la base de datos de parte de clientes
+								        	System.out.println(ClienteQuery(Query3,telefono)); 
+								        	existe=ClienteQuery(Query3,telefono);
+											
+											
+
 											if (Integer.parseInt(resultado)<50) {
+												//Realizamos reserva y la dejamos en espera si hay menos de 50 personas cierto dia;
+										        
+										        
+										        if (existe==false) {
+													//creamos cliente y reserva										  
+										        	String Query = "INSERT INTO "+NombreDBC+"(id, usuario, Contraseña) VALUES (NULL,'"+telefono+"','"+correo+"')";
+										        	CreaCliente(Query);
+										        	
+													JOptionPane.showMessageDialog(Formulario.this, "Creamos usuario");
+										        	
+
+													 Connection conec2=(Connection) conexion.MySQLConnect();
+													 String Query4 = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','Espera','"+telefono+"')";										
+													 Statement st2=conec2.createStatement();
+													 st2.executeUpdate(Query4);
+													 JOptionPane.showMessageDialog(Formulario.this, "Reserva realizada");
+										        	
+										        }else {
+													//insertamos solo reserva funciona
+
+													 Connection conec=(Connection) conexion.MySQLConnect();
+													 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','Espera','"+telefono+"')";										
+													 Statement st=conec.createStatement();
+													 st.executeUpdate(Query);
+													 JOptionPane.showMessageDialog(Formulario.this, "Reserva realizada");
+												}
+										
 												
-												 Connection conec=(Connection) conexion.MySQLConnect();
-												 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','Espera')";										
-												 Statement st=conec.createStatement();
-												 st.executeUpdate(Query);
-												 JOptionPane.showMessageDialog(Formulario.this, "Reserva realizada");
 //										       
 
 												}else {
+													//aqui cuando la reserva se rechaza por lleno
+													 if (existe==false) {
+															//creamos cliente y reserva
+												        	
+														 Connection conec=(Connection) conexion.MySQLConnect();
+														 String Query = "INSERT INTO "+NombreDBC+"(id, usuario, Contraseña) VALUES (,'"+telefono+"','"+correo+"')";										
+														 Statement st=conec.createStatement();
+														 st.executeUpdate(Query);
+														 
+														 JOptionPane.showMessageDialog(Formulario.this, "Creamos usuario");
+
+														 Connection conec2=(Connection) conexion.MySQLConnect();
+															 String Query4 = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado, id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','LLeno','"+telefono+"')";									
+															 Statement st2=conec.createStatement();
+															 st.executeUpdate(Query4);
+															 JOptionPane.showMessageDialog(Formulario.this, "No hay sufiente espacio en el restaurante seleccione otro turno o dia");
+												        	
+												      }else {
+															//insertamos solo reserva
+
+												        	 Connection conec=(Connection) conexion.MySQLConnect();
+															 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','LLeno','"+telefono+"')";									
+															 Statement st=conec.createStatement();
+															 st.executeUpdate(Query);
+															 JOptionPane.showMessageDialog(Formulario.this, "No hay sufiente espacio en el restaurante seleccione otro turno o dia");
+												        }
 													
-													 Connection conec=(Connection) conexion.MySQLConnect();
-													 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','LLeno')";									
-													 Statement st=conec.createStatement();
-													 st.executeUpdate(Query);
-													 JOptionPane.showMessageDialog(Formulario.this, "No hay sufiente espacio en el restaurante seleccione otro turno o dia");;
+													 
 												}
 																					
-								        } catch (SQLException ex) {
+											} catch (SQLException ex) {
 										// TODO Auto-generated catch block
 										ex.printStackTrace();
 								        	
@@ -298,12 +346,10 @@ public class Formulario extends JFrame {
 						
 									
 									 
-								}
-								
-							}
-						}
-						
-					}
+								}else{JOptionPane.showMessageDialog(Formulario.this, "Error de formato en la fecha recuerda que es AAAA/MM/DD");}								
+							}else{JOptionPane.showMessageDialog(Formulario.this, "Error de formato en el numero de personas recuerda que debe ser un numero");}
+						}else{JOptionPane.showMessageDialog(Formulario.this, "Error de formato en el numero de telefono recuerda que debe ser un numero");}						
+					}else{JOptionPane.showMessageDialog(Formulario.this, "Error de formato en el correo");}
 					
 					
 					
@@ -314,6 +360,57 @@ public class Formulario extends JFrame {
 					
 					
 					
+					
+				}
+				private void CreaCliente(String Query) throws SQLException {
+					// TODO Auto-generated method stub
+					Conexion  db= new Conexion();
+					db.MySQLConnect();
+					db.comando = db.conexion.createStatement();
+					db.comando.executeUpdate(Query);
+				
+				
+					
+				}
+				private boolean ClienteQuery(String query3, String telefono) throws SQLException {
+					//Comprobamos si existe cierto usuario
+					Conexion  db= new Conexion();
+					db.MySQLConnect();
+					db.comando = db.conexion.createStatement();
+					db.registro = db.comando.executeQuery(query3);
+					String resultado=String.valueOf(db.registro);
+					while(db.registro.next()) {
+						resultado=db.registro.getString(1);
+						System.out.println("?" +resultado);
+					}
+					if(resultado.equalsIgnoreCase(telefono)){
+						return true;
+					}
+					if (resultado!=telefono) {
+						return false;
+					}
+					// TODO Auto-generated method stub
+					return true;
+					
+				}
+				private String NumPersonasQuery(String Query2) throws SQLException {
+					//Comprobamos el numero de personas cierto dia
+					Conexion  db= new Conexion();
+					db.MySQLConnect();
+					db.comando = db.conexion.createStatement();
+					db.registro = db.comando.executeQuery(Query2);
+					String resultado=String.valueOf(db.registro);
+					while(db.registro.next()) {
+						resultado=db.registro.getString(1);
+						System.out.println(resultado);
+					}
+					if (resultado==null) {
+						return "0";
+					}else {
+						return resultado;
+					}
+					
+					// TODO Auto-generated method stub
 					
 				}
 				private boolean Fecha(String fecha) {
@@ -329,7 +426,7 @@ public class Formulario extends JFrame {
 					    /*
 					   
 					     *  MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
-					    SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+					    SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/dd/MM");
 					    sdfrmt.setLenient(false);
 					     /* cambiamos el formato de Sting a date  */
 					    try

@@ -131,7 +131,8 @@ public class Muestra extends JFrame {
 	                        "\nTurno: " + db.registro.getString(5) +
 	                        "\nNumero de Personas: " + db.registro.getString(6) +
 	                        "\nFecha: " + db.registro.getString(7) +
-	                        "\nEstado: " + db.registro.getString(8));
+	                        "\nEstado: " + db.registro.getString(8)+
+	        				"\nIdCliente: " + db.registro.getString(9));;
 	        		
 	        		textArea.append("\n------------------------------------------");
 
@@ -158,7 +159,7 @@ public class Muestra extends JFrame {
 	        		textArea.append("\nId: " + db.registro.getString(1)+
 	                		"\nNombre: " + db.registro.getString(2) + 
 	                        "\nEmail: " + db.registro.getString(3) +
-	                        "\nEmail: " + db.registro.getString(4) +
+	                        "\nTelefono: " + db.registro.getString(4) +
 	                        "\nTurno: " + db.registro.getString(5) +
 	                        "\nNumero de Personas: " + db.registro.getString(6) +
 	                        "\nFecha: " + db.registro.getString(7) +
