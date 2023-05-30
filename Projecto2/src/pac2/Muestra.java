@@ -7,6 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -119,7 +123,8 @@ public class Muestra extends JFrame {
 			Conexion db = new Conexion();
 	        db.MySQLConnect();
 	        String NombreDB = "reservas";
-	        String Query = "SELECT * FROM " + NombreDB +" WHERE `Estado` = 'Espera'";
+	        LocalDate todaysDate = LocalDate.now();
+	        String Query = "SELECT * FROM " + NombreDB +" WHERE `Estado` = 'Espera' AND `fecha`= '"+todaysDate+"'";
 	        db.comando = db.conexion.createStatement();
 	        db.registro = db.comando.executeQuery(Query);
 	        
@@ -145,13 +150,14 @@ public class Muestra extends JFrame {
 	        }
 	}
 	private void cancelada(JTextArea textArea) {
-		// TODO Auto-generated method stub
+		// Mostramos las reservas que ham sido rechazadas para hoy
 		try {
 			
 			Conexion db = new Conexion();
 	        db.MySQLConnect();
 	        String NombreDB = "reservas";
-	        String Query = "SELECT * FROM " + NombreDB +" WHERE `Estado` = 'Rechazada'";
+	        LocalDate todaysDate = LocalDate.now();
+	        String Query = "SELECT * FROM " + NombreDB +" WHERE `Estado` = 'Rechazada' AND `fecha`= '"+todaysDate+"'";
 	        db.comando = db.conexion.createStatement();
 	        db.registro = db.comando.executeQuery(Query);
 	        
@@ -177,13 +183,15 @@ public class Muestra extends JFrame {
 	        }
 	}
 	private void lleno(JTextArea textArea) {
-		// TODO Auto-generated method stub
+		// Mostramos las reservas que han sido descartadas por lleno
 		try {
 			
 			Conexion db = new Conexion();
 	        db.MySQLConnect();
 	        String NombreDB = "reservas";
-	        String Query = "SELECT * FROM " + NombreDB +" WHERE `Estado` = 'LLeno'";
+	        LocalDate todaysDate = LocalDate.now();
+	        //String fechaCad=CambiaFecha(todaysDate);
+	        String Query = "SELECT * FROM " + NombreDB +" WHERE `Estado` = 'LLeno' AND `fecha`= '"+todaysDate+"'";
 	        db.comando = db.conexion.createStatement();
 	        db.registro = db.comando.executeQuery(Query);
 	        
@@ -207,4 +215,26 @@ public class Muestra extends JFrame {
 			
 	        }
 	}
+	private String CambiaFecha(String fecha) {
+		// Metodo para cambiar el formato de la fecha y porder hacer el insert correctamente en la BBDD
+		 SimpleDateFormat sdfrmt = new SimpleDateFormat("dd-MM-yyyy");
+		 Date javaDate=null;
+		 try {
+			javaDate = sdfrmt.parse(fecha);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+        System.out.println("Original Date: "+javaDate);
+ 
+        // Specify format as "yyyy-MM-dd"
+        SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+ 
+        // Use format method on SimpleDateFormat
+        String formattedDateStr = dmyFormat.format(javaDate);
+        System.out.println("Formatted Date in String format: "+formattedDateStr);
+		return formattedDateStr;
+	}
+
 }

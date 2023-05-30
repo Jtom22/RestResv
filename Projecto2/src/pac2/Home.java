@@ -104,7 +104,7 @@ public class Home extends JFrame {
 		Button button = new Button("Login");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				//Para poder avanzar a la siguiente aplicacion hacemos un login conectandose con la base de datis
 				boolean existe=false;
 				Conexion db = new Conexion();
 		        db.MySQLConnect();

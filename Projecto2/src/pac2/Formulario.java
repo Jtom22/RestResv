@@ -250,11 +250,10 @@ public class Formulario extends JFrame {
 
 									
 								    
-								     String fechaComoCadena="'"+fecha+"'";
-									 String Query2 = "SELECT SUM(`numero`) FROM `reservas` WHERE `fecha`=" +fechaComoCadena +"AND `turno`="+turno;
-									 SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/dd/MM");
+								     String fechaComoCadena=fecha;
+									 String Query2 = "SELECT SUM(`numero`) FROM `reservas` WHERE `fecha`=" +fechaComoCadena +" AND `turno`="+turno;
+									 SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
 									 Date fechaComoDate = null;
-									 //String Query3 = "SELECT * FROM `reservas` WHERE `id_cliente`= "+telefono;
 									 String Query3 = "SELECT usuario FROM `clientes` WHERE `usuario`= "+telefono;
 									  
 									try {
@@ -313,7 +312,7 @@ public class Formulario extends JFrame {
 															//creamos cliente y reserva
 												        	
 														 Connection conec=(Connection) conexion.MySQLConnect();
-														 String Query = "INSERT INTO "+NombreDBC+"(id, usuario, Contraseña) VALUES (,'"+telefono+"','"+correo+"')";										
+														 String Query = "INSERT INTO "+NombreDBC+"(id, usuario, Contraseña) VALUES (NULL,'"+telefono+"','"+correo+"')";										
 														 Statement st=conec.createStatement();
 														 st.executeUpdate(Query);
 														 
@@ -346,7 +345,7 @@ public class Formulario extends JFrame {
 						
 									
 									 
-								}else{JOptionPane.showMessageDialog(Formulario.this, "Error de formato en la fecha recuerda que es AAAA/MM/DD");}								
+								}else{JOptionPane.showMessageDialog(Formulario.this, "Error de formato en la fecha recuerda que es dd-MM-yyyy");}								
 							}else{JOptionPane.showMessageDialog(Formulario.this, "Error de formato en el numero de personas recuerda que debe ser un numero");}
 						}else{JOptionPane.showMessageDialog(Formulario.this, "Error de formato en el numero de telefono recuerda que debe ser un numero");}						
 					}else{JOptionPane.showMessageDialog(Formulario.this, "Error de formato en el correo");}
@@ -415,18 +414,18 @@ public class Formulario extends JFrame {
 				}
 				private boolean Fecha(String fecha) {
 					// TODO Auto-generated method stub
-					/* Check if date is 'null' */
+					/* COmprueba si date es null */
 					if (fecha.trim().equals(""))
 					{
 					    return false;
 					}
-					/* Date is not 'null' */
+					/* Si date no es null */
 					else
 					{
 					    /*
 					   
 					     *  MM-dd-yyyy, MM.dd.yyyy,dd.MM.yyyy etc.*/
-					    SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy/dd/MM");
+					    SimpleDateFormat sdfrmt = new SimpleDateFormat("dd-MM-yyyy");
 					    sdfrmt.setLenient(false);
 					     /* cambiamos el formato de Sting a date  */
 					    try
