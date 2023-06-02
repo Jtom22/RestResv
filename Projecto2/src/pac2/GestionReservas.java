@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.AddressException;
+
 import java.awt.FlowLayout;
 import java.awt.TextArea;
 import java.sql.SQLException;
@@ -149,9 +153,7 @@ public class GestionReservas extends JFrame {
 		
 		
 		
-		JButton btnNewButton_2 = new JButton("Avisar");
-		btnNewButton_2.setBounds(539, 441, 125, 39);
-		panel_1.add(btnNewButton_2);
+		
 		
 		
 		
@@ -307,7 +309,27 @@ public class GestionReservas extends JFrame {
 		esperaBoton.setBounds(290, 441, 125, 39);
 		panel_1.add(esperaBoton);
 		
-		
+		JButton enviarMail = new JButton("Avisar");
+		enviarMail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//cogemos la lista que se muestra en pantalla y mandamos un correo a los seleccionados
+				int tamaño=list.getSelectedValuesList().size();
+				String b[] = new String[tamaño];
+				list.getSelectedValuesList().toArray(b);							
+				for (int i =0;i<tamaño ;i++) {				
+				
+					EnviarCorreo(b[i].toString());
+								
+				}
+				
+				
+				
+				
+				
+			}
+		});
+		enviarMail.setBounds(539, 441, 125, 39);
+		panel_1.add(enviarMail);
 
 
 		
@@ -318,6 +340,44 @@ public class GestionReservas extends JFrame {
 	}
 
 	
+
+	protected void EnviarCorreo(String string){
+		// TODO Auto-generated method stub
+		String idReserva="";
+		String Correo="";
+		Conexion db = new Conexion();
+        db.MySQLConnect();
+        String valor[]= string.split(" ");
+        
+        for (int i = 0;i<valor.length;i++) {
+        	//System.out.println(valor[i]+" "+i);
+			
+			if (i==11) {
+				System.out.println(valor[i]);
+				idReserva=valor[i];
+				
+				  
+				      
+			}else if(i==15) {
+				System.out.println(valor[i]+" "+i);
+				Correo=valor[i];  
+		
+			}else {
+				
+			}
+			try {
+				JavaMailUtil.sendMail(idReserva,Correo);
+			} catch (AddressException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        
+		
+	}
 
 	protected void Cancelar(String string) {
 		// El string que nos llega del metodo comprobamos que el estado es Aceptada y dividimos el string donde esta el idReserva para saber a que reserva nos referimos
@@ -431,7 +491,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));		 
 		        		DLM.addElement(info); 
 		        		lista.setModel(DLM);
 		        		//lista.add(DLM);
@@ -455,7 +516,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Nº Personas: " + db.registro.getString(6) +
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));		 
 		        		DLM.addElement(info); 
 		        		lista.setModel(DLM);
 		        		//lista.add(DLM);
@@ -523,7 +585,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));		 
 		        		DLM.addElement(info); 
 		        		lista.setModel(DLM);
 		        		//lista.add(DLM);
@@ -556,7 +619,8 @@ public class GestionReservas extends JFrame {
 	                        "\n Fecha: " + db.registro.getString(7) +
 	                        "\n Estado: " + db.registro.getString(8)+
 	                        "\n IdReserva: " + db.registro.getString(1)+
-	        				"\n IdCliente: " + db.registro.getString(9));	 
+	                        "\n IdCliente: " + db.registro.getString(9)+
+	                        "\n Correo: " + db.registro.getString(3));	 
 	        		DLM.addElement(info); 
 	        		lista.setModel(DLM);
 	        		//lista.add(DLM);
@@ -596,7 +660,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));		 
 		        		DLM.addElement(info); 
 		        		lista.setModel(DLM);
 		        		//lista.add(DLM);
@@ -626,7 +691,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		        				"\n IdCliente: " + db.registro.getString(9)+
+		        				"\n Correo: " + db.registro.getString(3));	 
 		        		DLM.addElement(info); 
 		        		lista.setModel(DLM);
 		        		//lista.add(DLM);
@@ -664,7 +730,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));	 
 		        		DLM.addElement(info); 
 		        		lista.setModel(DLM);
 		        		//lista.add(DLM);
@@ -695,7 +762,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));		 
 		        		DLM.addElement(info); 
 		        		lista.setModel(DLM);
 		        		//lista.add(DLM);
@@ -737,7 +805,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));		 
 		        		DLM.addElement(info); 
 		        		lista.setModel(DLM);
 		        	}
@@ -768,7 +837,8 @@ public class GestionReservas extends JFrame {
 	                        "\n Fecha: " + db.registro.getString(7) +
 	                        "\n Estado: " + db.registro.getString(8)+
 	                        "\n IdReserva: " + db.registro.getString(1)+
-	        				"\n IdCliente: " + db.registro.getString(9));	 
+	                        "\n IdCliente: " + db.registro.getString(9)+
+	                        "\n Correo: " + db.registro.getString(3));		 
 	        		DLM.addElement(info); 
 	        		lista.setModel(DLM);
 	        		//lista.add(DLM);
@@ -801,7 +871,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));		 
 		        		DLM.addElement(info); 
 		        		list.setModel(DLM);
 		        	}
@@ -825,7 +896,8 @@ public class GestionReservas extends JFrame {
 	                        "\n Fecha: " + db.registro.getString(7) +
 	                        "\n Estado: " + db.registro.getString(8)+
 	                        "\n IdReserva: " + db.registro.getString(1)+
-	        				"\n IdCliente: " + db.registro.getString(9));	 
+	                        "\n IdCliente: " + db.registro.getString(9)+
+	        				"\n Correo: " + db.registro.getString(3));		 
 	        		DLM.addElement(info); 
 	        		list.setModel(DLM);
 	        		
@@ -862,7 +934,8 @@ public class GestionReservas extends JFrame {
 			                        "\n Fecha: " + db.registro.getString(7) +
 			                        "\n Estado: " + db.registro.getString(8)+
 			                        "\n IdReserva: " + db.registro.getString(1)+
-			        				"\n IdCliente: " + db.registro.getString(9));	 
+			                        "\n IdCliente: " + db.registro.getString(9)+
+			                        "\n Correo: " + db.registro.getString(3));		 
 			        		DLM.addElement(info); 
 			        		list.setModel(DLM);
 			        		
@@ -887,7 +960,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));		 
 		        		DLM.addElement(info); 
 		        		list.setModel(DLM);
 		        		
@@ -922,7 +996,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));	 
 		        		DLM.addElement(info); 
 		        		list.setModel(DLM);
 		        		
@@ -947,7 +1022,8 @@ public class GestionReservas extends JFrame {
 		                        "\n Fecha: " + db.registro.getString(7) +
 		                        "\n Estado: " + db.registro.getString(8)+
 		                        "\n IdReserva: " + db.registro.getString(1)+
-		        				"\n IdCliente: " + db.registro.getString(9));	 
+		                        "\n IdCliente: " + db.registro.getString(9)+
+		                        "\n Correo: " + db.registro.getString(3));	 
 		        		DLM.addElement(info); 
 		        		list.setModel(DLM);
 		        		
