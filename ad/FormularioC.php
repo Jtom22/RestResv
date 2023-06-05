@@ -5,9 +5,10 @@
     $baseDeDatos="elpalacio";
 
     $enlace = mysqli_connect($servidor,$usuario,$clave, $baseDeDatos);
-    if(!enlace){
-     echo "Error en la conexioni con el servidor"   
+    if(!$enlace){
+     echo "Error en la conexioni con el servidor";   
     }
+
     ?>
 <!DOCTYPE html>
 
@@ -52,19 +53,19 @@
             
 
                 <div id="part1">
-                    <form method="get" action="accion.html" id="form">
+                    <form method="POST" action="#" id="form">
                         <div class="cajaFormulario">
                             <div id="formulario">
                                 <div id="formulario1">
                                     <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" placeholder="Nombre" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="Nombre" aria-label="default input example" name='nombre'>
         
                                     <label for="exampleFormControlInput1" class="form-label">Correo Electronico</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@example.com">
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@example.com" name="correo">
 
         
                                     <label for="exampleFormControlInput1" class="form-label">Teléfono</label>
-                                    <input class="form-control" type="text" placeholder="632157874" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="632157874" aria-label="default input example" name="telefono">
         
                                 
                                 </div>
@@ -72,21 +73,21 @@
                                 <div id="formulario2">
                               
                                     <label for="exampleFormControlInput1" class="form-label">Número de clientes</label>
-                                    <input class="form-control" type="text" placeholder="" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="" aria-label="default input example" name="numero">
                                     
         
                                     <label for="exampleFormControlInput1" class="form-label">Fecha</label>
-                                    <input class="form-control" type="text" placeholder="17/04/23" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="17/04/23" aria-label="default input example" name="fecha">
         
                                     <label for="exampleFormControlInput1" class="form-label">Numero de turno</label>
-                                    <input class="form-control" type="text" placeholder="1 o 2" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="1 o 2" aria-label="default input example" name="turno">
         
         
                                 </div>
     
     
                             </div>
-                            <div class="text-center"><input type="submit" name="enviar" class="btn btn-dark " id="enviar" /></div>
+                            <div class="text-center"><input type="submit" name="registrarse" class="btn btn-dark" id="enviar" value="Reservar"  /></div>
 
 
                         </div>
@@ -131,3 +132,29 @@
     </body>
 
 </html>
+<?php 
+if(isset($_POST['registrarse'])){
+    $nombre=$_POST['nombre'];
+    $correo=$_POST['correo'];
+    $telefono=$_POST['telefono'];
+    $turno=$_POST['turno'];
+    $numero=$_POST['numero'];
+    $fecha =date("d-m-Y", strtotime($_POST['fecha']));
+    $fecha2 =date("Y-m-d", strtotime($fecha));
+    $estado='Espera';
+    $idcliente=$_POST['id_cliente'];
+   
+   
+    $insertarDatos = "INSERT INTO reservas VALUES (null, '$nombre','$correo', '$telefono', '$turno', '$numero', '$fecha2', '$estado', '33')";
+
+    $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
+    
+    if(!$ejecutarInsertar){
+        echo"fallo sql";
+        
+    }else{
+        
+    }
+}
+
+?>

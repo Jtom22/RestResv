@@ -1,15 +1,20 @@
-<?php 
-    $servidor="localhost";
-    $usuario="root";
-    $clave="";
-    $baseDeDatos="elpalacio";
+<?php
+$servidor="localhostaa";
+$usuario="root";
+$clave="";
+$baseDeDatos="formulario";
+$enlace= mysqli_connect($servidor, $usuario, $clave, $baseDeDatos);
 
-    $enlace = mysqli_connect($servidor,$usuario,$clave, $baseDeDatos);
-    if(!enlace){
-     echo "Error en la conexioni con el servidor"   
-    }
-    ?>
+if(!$enlace){
+    echo"Error en la concexion con el servidor";
+}else{
+    echo"Que si funciona vamossss siuuuuu";
+}
+
+
+?>
 <!DOCTYPE html>
+
 
 <html>
 
@@ -47,7 +52,16 @@
         </div>
 
         <div id="page" class="align-middle">
-            <!-- contenedor -->
+            <!-- contenedor 
+        $id=;
+$nombre
+$Correo
+$telefono
+$turno
+$Numero
+$Fecha
+$estado
+$id_cliente-->
 
             
 
@@ -56,6 +70,7 @@
                         <div class="cajaFormulario">
                             <div id="formulario">
                                 <div id="formulario1">
+                                    <?php echo "loco";?>
                                     <label for="exampleFormControlInput1" class="form-label">Nombre</label>
                                     <input class="form-control" type="text" placeholder="Nombre" aria-label="default input example">
         

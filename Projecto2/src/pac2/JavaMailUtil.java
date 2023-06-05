@@ -37,7 +37,8 @@ public class JavaMailUtil {
 		    @Override
 		    protected PasswordAuthentication getPasswordAuthentication() {
 		        String username = "jorgetomasmarco24@gmail.com";
-				String pass= "nhyipffwoyisluuy";
+				String pass2= "nhyipffwoyisluuy";
+				String pass= "Tormenta24";
 				return new PasswordAuthentication(username, pass);
 		    }
 		});
