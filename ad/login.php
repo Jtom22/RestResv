@@ -5,7 +5,7 @@
     <link  href="style2.css" rel="stylesheet" type="text/css" >
   </head>
   <body>
-    <form method="POST" action="#" name="signup-form" class="centrar2">
+    <form method="POST" action="tablas.php" name="signup-form" class="centrar2">
         <div>
             <label id=titulo>Registro</label>
         </div>
@@ -57,7 +57,7 @@ if(isset($_POST['register'])){
         }
         //Si no existe lo va a enviar al login otra vez.
         else if($nr <= 0) { 
-            echo "fallo";
+            
             header("Location:login.php"); 
         }  
         }
