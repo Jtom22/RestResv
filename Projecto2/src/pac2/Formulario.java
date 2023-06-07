@@ -250,8 +250,8 @@ public class Formulario extends JFrame {
 
 									
 								    
-								     String fechaComoCadena=fecha;
-									 String Query2 = "SELECT SUM(`numero`) FROM `reservas` WHERE `fecha`=" +fechaComoCadena +" AND `turno`="+turno;
+								     String fechaComoCadena=CambiaFecha(fecha);
+									 String Query2 = "SELECT SUM(`numero`) FROM `reservas` WHERE `fecha`='" +fechaComoCadena +"' AND `turno`='"+turno+"'";
 									 SimpleDateFormat sdfrmt = new SimpleDateFormat("yyyy-MM-dd");
 									 Date fechaComoDate = null;
 									 String Query3 = "SELECT usuario FROM `clientes` WHERE `usuario`= "+telefono;
@@ -288,7 +288,7 @@ public class Formulario extends JFrame {
 										        	
 
 													 Connection conec2=(Connection) conexion.MySQLConnect();
-													 String Query4 = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','Espera','"+telefono+"')";										
+													 String Query4 = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoCadena+"','Espera','"+telefono+"')";										
 													 Statement st2=conec2.createStatement();
 													 st2.executeUpdate(Query4);
 													 JOptionPane.showMessageDialog(Formulario.this, "Reserva realizada");
@@ -297,7 +297,7 @@ public class Formulario extends JFrame {
 													//insertamos solo reserva funciona
 
 													 Connection conec=(Connection) conexion.MySQLConnect();
-													 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','Espera','"+telefono+"')";										
+													 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoCadena+"','Espera','"+telefono+"')";										
 													 Statement st=conec.createStatement();
 													 st.executeUpdate(Query);
 													 JOptionPane.showMessageDialog(Formulario.this, "Reserva realizada");
@@ -319,7 +319,7 @@ public class Formulario extends JFrame {
 														 JOptionPane.showMessageDialog(Formulario.this, "Creamos usuario");
 
 														 Connection conec2=(Connection) conexion.MySQLConnect();
-														 String Query4 = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado, id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','LLeno','"+telefono+"')";									
+														 String Query4 = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado, id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoCadena+"','LLeno','"+telefono+"')";									
 														 Statement st2=conec.createStatement();
 														 st.executeUpdate(Query4);
 														 JOptionPane.showMessageDialog(Formulario.this, "No hay sufiente espacio en el restaurante seleccione otro turno o dia");
@@ -328,7 +328,7 @@ public class Formulario extends JFrame {
 															//insertamos solo reserva
 
 											        	 Connection conec=(Connection) conexion.MySQLConnect();
-														 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoDate+"','LLeno','"+telefono+"')";									
+														 String Query = "INSERT INTO "+NombreDB+"(id, nombre, telefono, correo, turno, numero, fecha, Estado,id_cliente) VALUES (NULL,'"+nombre+"','"+telefono+"','"+correo+"','"+turno+"','"+numCli+"','"+fechaComoCadena+"','LLeno','"+telefono+"')";									
 														 Statement st=conec.createStatement();
 														 st.executeUpdate(Query);
 														 JOptionPane.showMessageDialog(Formulario.this, "No hay sufiente espacio en el restaurante seleccione otro turno o dia");
@@ -467,5 +467,25 @@ public class Formulario extends JFrame {
 			panel.add(lblNewLabel_6);
 		}
 		
-	
+		private String CambiaFecha(String fecha) {
+			// Metodo para cambiar el formato del a fecha y poder hacer insert en la BBDD
+			 SimpleDateFormat sdfrmt = new SimpleDateFormat("dd-MM-yyyy");
+			 Date javaDate=null;
+			 try {
+				javaDate = sdfrmt.parse(fecha);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+	        System.out.println("Original Date: "+javaDate);
+	 
+	        // Specify format as "yyyy-MM-dd"
+	        SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+	 
+	        // Use format method on SimpleDateFormat
+	        String formattedDateStr = dmyFormat.format(javaDate);
+	        System.out.println("Formatted Date in String format: "+formattedDateStr);
+			return formattedDateStr;
+		}
 }
