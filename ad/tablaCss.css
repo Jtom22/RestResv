@@ -5,11 +5,78 @@
 }
 #tablas{
     width: fit-content;
+    position: relative;
+	top: 50%;
+	left: 35%;
+    color:white
+	
 }
+.Titulo{
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color:white;
+
+}
+#menos{
+    width: 50%;    
+}
+
 body {
-    margin: auto;
+    margin: 50px auto;
     text-align: center;
-    width: 800px;
+    width: auto;
+    height: max-content;
 	background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(../img/rest.jpg);
 	color: white;
+}
+footer{
+    height: fit-content;
+    background-color: rgb(38, 42, 44);
+    text-align: center;
+    color:white;
+    height: 10vh;
+   
+}
+.centrar{
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+  
+
+} 
+.centrar2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+
+}
+.centrar3{
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+}
+
+
+li{
+    font-size: 2vh;
+}
+ul{
+    list-style-type: none;
+    justify-content: none ;
+}
+@media (min-width: 300px)  {
+    
+    #icono {max-width: 275px;}
+}
+@media(max-width:300px){
+    body{
+        font-size: 10px !important;
+    }
 }

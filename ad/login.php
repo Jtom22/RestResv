@@ -59,6 +59,7 @@ if(isset($_POST['register'])){
         else if($nr <= 0) { 
             
             header("Location:login.php"); 
+            die();
         }  
         }
         else{

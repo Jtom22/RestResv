@@ -164,6 +164,9 @@ ul{
     list-style-type: none;
     justify-content: none ;
 }
+p{
+    color:white;
+}
 @media (min-width: 300px)  {
     
     #icono {max-width: 275px;}
