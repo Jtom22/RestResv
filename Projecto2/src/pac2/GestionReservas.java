@@ -42,6 +42,7 @@ import javax.swing.JTable;
 import javax.swing.JComboBox;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 public class GestionReservas extends JFrame {
 
@@ -52,27 +53,9 @@ public class GestionReservas extends JFrame {
 	int Opcion;
 	int Turno=0;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GestionReservas frame = new GestionReservas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 * @param i 
-	 */
+	
 	public GestionReservas() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GestionReservas.class.getResource("/Imagenes/IconoRestaurante.png")));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 601);

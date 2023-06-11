@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class Muestra extends JFrame {
 
@@ -47,6 +48,7 @@ public class Muestra extends JFrame {
 	 * @param i 
 	 */
 	public Muestra(int i) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Muestra.class.getResource("/Imagenes/IconoRestaurante.png")));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 581, 451);
