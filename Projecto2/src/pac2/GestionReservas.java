@@ -12,10 +12,13 @@ import jakarta.mail.internet.AddressException;
 import java.awt.FlowLayout;
 import java.awt.TextArea;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -107,7 +110,7 @@ public class GestionReservas extends JFrame {
 	      		new Menu().setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(415, 441, 125, 39);
+		btnNewButton.setBounds(377, 444, 125, 39);
 		panel_1.add(btnNewButton);
 		
 		buscador_txt = new JTextField();
@@ -286,7 +289,7 @@ public class GestionReservas extends JFrame {
 			
 			}
 		});
-		CancelarReserva.setBounds(153, 441, 138, 39);
+		CancelarReserva.setBounds(115, 444, 138, 39);
 		panel_1.add(CancelarReserva);
 		
 		
@@ -306,21 +309,17 @@ public class GestionReservas extends JFrame {
 				
 			}
 		});
-		esperaBoton.setBounds(290, 441, 125, 39);
+		esperaBoton.setBounds(252, 444, 125, 39);
 		panel_1.add(esperaBoton);
 		
 		JButton enviarMail = new JButton("Avisar");
 		enviarMail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//cogemos la lista que se muestra en pantalla y mandamos un correo a los seleccionados
-				int tamaño=list.getSelectedValuesList().size();
-				String b[] = new String[tamaño];
-				list.getSelectedValuesList().toArray(b);							
-				for (int i =0;i<tamaño ;i++) {				
 				
-					EnviarCorreo(b[i].toString());
-								
-				}
+				List b = list.getSelectedValuesList();
+				EnviarCorreo(b);
+						
 				
 				
 				
@@ -328,8 +327,19 @@ public class GestionReservas extends JFrame {
 				
 			}
 		});
-		enviarMail.setBounds(539, 441, 125, 39);
+		enviarMail.setBounds(501, 444, 125, 39);
 		panel_1.add(enviarMail);
+		
+		JButton enviarMail_1 = new JButton("Confirmacion");
+		enviarMail_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				CompruebaFechaHoy();
+			
+			}
+		});
+		enviarMail_1.setBounds(622, 444, 125, 39);
+		panel_1.add(enviarMail_1);
 
 
 		
@@ -341,32 +351,55 @@ public class GestionReservas extends JFrame {
 
 	
 
-	protected void EnviarCorreo(String string){
+	protected void EnviarCorreo(List b){
 		// TODO Auto-generated method stub
 		String idReserva="";
-		String Correo="";
+		String correo="";
 		Conexion db = new Conexion();
         db.MySQLConnect();
-        String valor[]= string.split(" ");
         
-        for (int i = 0;i<valor.length;i++) {
-        	//System.out.println(valor[i]+" "+i);
-			
-			if (i==11) {
-				System.out.println(valor[i]);
-				idReserva=valor[i];
-				
-				  
-				      
-			}else if(i==15) {
-				System.out.println(valor[i]+" "+i);
-				Correo=valor[i];  
+        for (int i = 0;i<b.size();i++) {
+        	//System.out.println(valor[i]+" "+i);		
+			System.out.println(b.get(i).toString());
+			String al =  (String) b.get(i);
+			String valor[]= al.split(" ");
+			idReserva=valor[11];
+			correo=valor[15];
+
+
 		
-			}else {
-				
-			}
 			try {
-				JavaMailUtil.sendMail(idReserva,Correo);
+				JavaMailUtil.sendMail(idReserva,correo);
+			} catch (AddressException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        
+		
+	}
+	protected void EnviarCorreoConfirmacion(List b){
+		// TODO Auto-generated method stub
+		String idReserva="";
+		String correo="";
+		Conexion db = new Conexion();
+        db.MySQLConnect();
+        
+        for (int i = 0;i<b.size();i++) {
+        	//System.out.println(valor[i]+" "+i);		
+			System.out.println(b.get(i).toString());
+			String al =  (String) b.get(i);
+			String valor[]= al.split(" ");
+			idReserva=valor[1];
+			correo=valor[0];
+
+
+		
+			try {
+				JavaMailUtil.sendMail(idReserva,correo);
 			} catch (AddressException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -389,9 +422,9 @@ public class GestionReservas extends JFrame {
 	        
 	        for (int i = 0;i<valor.length;i++) {
 	        	
-				
+				System.out.println(i);
 				if (i==11) {
-					System.out.println(valor[i]);
+				
 					idReserva=valor[i];
 					
 					  if (string.contains("Aceptada")) {
@@ -400,7 +433,7 @@ public class GestionReservas extends JFrame {
 						  //db.registro = db.comando.executeUpdate(Query);
 						  int value = db.comando.executeUpdate(Query);
 					      
-					    // System.out.println(value);
+					  
 					      
 					  }else {
 						  
@@ -426,10 +459,10 @@ public class GestionReservas extends JFrame {
 			Conexion db = new Conexion();
 	        db.MySQLConnect();
 	        String valor[]= string.split(" ");
-	        
+	    
 	        for (int i = 0;i<valor.length;i++) {
 	        	
-				
+				System.out.println(valor[i]);
 				if (i==11) {
 					System.out.println(valor[i]);
 					idReserva=valor[i];
@@ -439,7 +472,7 @@ public class GestionReservas extends JFrame {
 						  //db.registro = db.comando.executeUpdate(Query);
 						  int value = db.comando.executeUpdate(Query);
 					      
-					    // System.out.println(value);
+					   
 					      
 					  }else {
 						  
@@ -1067,5 +1100,51 @@ public class GestionReservas extends JFrame {
 		    /* Devuelve true si es valido */
 		    return true;
 		}
+	}
+		private void CompruebaFechaHoy(){
+			try {
+				
+	
+				Conexion db = new Conexion();
+		        db.MySQLConnect();
+		        String NombreDB = "reservas";
+		        String Query;
+		        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		        String date = dateFormat.format(new Date());
+		        
+						
+				  //Query= "SELECT * FROM " + NombreDB +" WHERE Fecha = '1970-01-01'";
+		        	//System.out.println(fechaCad);
+				Query= "SELECT * FROM " + NombreDB +" WHERE `fecha`= '"+date+"'";
+			        
+				
+			      
+			        db.comando = db.conexion.createStatement();
+			        db.registro = db.comando.executeQuery(Query);
+			        DefaultListModel DLM = new DefaultListModel();
+			        TextArea textarea = new TextArea(); 
+			        
+			     
+			        //List b = list.getSelectedValuesList();
+			        List<String> b = new ArrayList<String>();
+			        	while (db.registro.next()) {  
+			        		
+			        		String info=db.registro.getString(7)+" "+db.registro.getString(1);
+			        		b.add(info);
+			        		EnviarCorreoConfirmacion(b);
+			        		
+			        	
+			        	}
+			      
+					
+      	
+			}catch (SQLException ex) {
+				ex.printStackTrace();
+		        }
+			
+			
+			
+	
+			
 	}
 }

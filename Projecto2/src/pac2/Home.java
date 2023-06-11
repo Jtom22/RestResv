@@ -97,7 +97,7 @@ public class Home extends JFrame {
 	            Home.this.setLocation(x - xx, y - xy);  
 			}
 		});
-		label.setBounds(-183, -22, 617, 621);
+		label.setBounds(-137, -43, 617, 621);
 		label.setVerticalAlignment(SwingConstants.TOP);
 		panel.add(label);
 		

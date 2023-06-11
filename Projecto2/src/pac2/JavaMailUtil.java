@@ -30,25 +30,27 @@ public class JavaMailUtil {
 		Properties prop = new Properties();
 		prop.put("mail.smtp.auth", true);
 		prop.put("mail.smtp.starttls.enable", "true");
-		prop.put("mail.smtp.host", "smtp.mailtrap.io");
+		prop.put("mail.smtp.host", "smtp.gmail.com");
 		prop.put("mail.smtp.port", "587");
-		prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
+		//prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 		Session session = Session.getInstance(prop, new Authenticator() {
 		    @Override
 		    protected PasswordAuthentication getPasswordAuthentication() {
 		        String username = "jorgetomasmarco24@gmail.com";
-				String pass2= "nhyipffwoyisluuy";
-				String pass= "Tormenta24";
+				String pass= "jqoeecuucwwlejmm";
+				String pass2= "Tormenta24";
 				return new PasswordAuthentication(username, pass);
 		    }
 		});
 		Message message = new MimeMessage(session);	
 		message.setFrom(new InternetAddress("jorgetomasmarco24@gmail.com"));
+		//message.setRecipients(
+		  //Message.RecipientType.TO, InternetAddress.parse(correo));
 		message.setRecipients(
-		  Message.RecipientType.TO, InternetAddress.parse("jorgetomasmarco@hotmail.com"));
+				  Message.RecipientType.TO, InternetAddress.parse("jorgetomasmarco@hotmail.com"));
 		message.setSubject("Mail Subject");
 
-		String msg = "This is my first email using JavaMailer";
+		String msg = "El id reserva es "+ idReserva + " ve a la pagina web y confirma la reserva el usuario es tu telefono y la contraseña el correo";
 
 		MimeBodyPart mime= new MimeBodyPart();
 		
@@ -59,7 +61,6 @@ public class JavaMailUtil {
 		message.setContent(multi);
 		
 		Transport.send(message);
-		System.out.println("llega");
 		
 	}
 
