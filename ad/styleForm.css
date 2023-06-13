@@ -88,7 +88,7 @@
 }
 #home{
     background-color: #3a3a3a;
-    color:rgb(255, 255, 255);
+    color:rgb(0, 0, 0);
 }
 .reaparece{
     filter:brightness(30%);
@@ -165,7 +165,8 @@ ul{
     justify-content: none ;
 }
 p{
-    color:white;
+    color:rgb(0, 0, 0)!important;
+    
 }
 @media (min-width: 300px)  {
     

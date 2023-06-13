@@ -1,20 +1,16 @@
-<?php
-$servidor="localhostaa";
-$usuario="root";
-$clave="";
-$baseDeDatos="formulario";
-$enlace= mysqli_connect($servidor, $usuario, $clave, $baseDeDatos);
+<?php 
+    $servidor="localhost";
+    $usuario="root";
+    $clave="";
+    $baseDeDatos="elpalacio";
 
-if(!$enlace){
-    echo"Error en la concexion con el servidor";
-}else{
-    echo"Que si funciona vamossss siuuuuu";
-}
+    $enlace = mysqli_connect($servidor,$usuario,$clave, $baseDeDatos);
+    if(!$enlace){
+     echo "Error en la conexioni con el servidor";   
+    }
 
-
-?>
+    ?>
 <!DOCTYPE html>
-
 
 <html>
 
@@ -52,34 +48,24 @@ if(!$enlace){
         </div>
 
         <div id="page" class="align-middle">
-            <!-- contenedor 
-        $id=;
-$nombre
-$Correo
-$telefono
-$turno
-$Numero
-$Fecha
-$estado
-$id_cliente-->
+            <!-- contenedor -->
 
             
 
                 <div id="part1">
-                    <form method="get" action="accion.html" id="form">
+                    <form method="POST" action="" id="form">
                         <div class="cajaFormulario">
                             <div id="formulario">
                                 <div id="formulario1">
-                                    <?php echo "loco";?>
                                     <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                                    <input class="form-control" type="text" placeholder="Nombre" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="Nombre" aria-label="default input example" name='nombre'>
         
                                     <label for="exampleFormControlInput1" class="form-label">Correo Electronico</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@example.com">
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@example.com" name="correo">
 
         
                                     <label for="exampleFormControlInput1" class="form-label">Teléfono</label>
-                                    <input class="form-control" type="text" placeholder="632157874" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="632157874" aria-label="default input example" name="telefono">
         
                                 
                                 </div>
@@ -87,21 +73,21 @@ $id_cliente-->
                                 <div id="formulario2">
                               
                                     <label for="exampleFormControlInput1" class="form-label">Número de clientes</label>
-                                    <input class="form-control" type="text" placeholder="" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="" aria-label="default input example" name="numero">
                                     
         
                                     <label for="exampleFormControlInput1" class="form-label">Fecha</label>
-                                    <input class="form-control" type="text" placeholder="17/04/23" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="17/04/23" aria-label="default input example" name="fecha">
         
                                     <label for="exampleFormControlInput1" class="form-label">Numero de turno</label>
-                                    <input class="form-control" type="text" placeholder="1 o 2" aria-label="default input example">
+                                    <input class="form-control" type="text" placeholder="1 o 2" aria-label="default input example" name="turno">
         
         
                                 </div>
     
     
                             </div>
-                            <div class="text-center"><input type="submit" name="enviar" class="btn btn-dark " id="enviar" /></div>
+                            <div class="text-center"><input type="submit" name="registrarse" class="btn btn-dark" id="enviar" value="Reservar"  /></div>
 
 
                         </div>
@@ -120,29 +106,59 @@ $id_cliente-->
 
 
         </div>
-        <div id="footer">
 
-                
-            
-            <div class="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h3>Nuestra web</h3>
-                        <P class="text-muted">info@website.com</P>
-                    </div>
-                    <div class="col-sm-4">
-                        <h3>Número de telefono</h3>
-                        <P class="text-muted">(123) 456-7890</P>
-                    </div>
-                    <div class="col-sm-4">
-                        <h3>Dirección</h3>
-                        <P class="text-muted">12345 Fake ST NoWhere AB Country</P>
-                    </div>
-                </div>
-                
-           
+        <div id="footer">
+          
+        <div class="container-fluid bg-dark text-light has-height-md middle-items text-center wow fadeIn">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Redes</h3>
+                <p><span class="ti-location-pin pr-3"></span> https://twitter.com/El_Palacio</p>
+                <p><span class="ti-support pr-3"></span> https://www.facebook.com/El_Palacio</p>
+                <p><span class="ti-email pr-3"></span>info@website.com</p>
+            </div>
+            <div class="col-sm-4">
+                <h3>Número de teléfono</h3>
+                <P class="text-muted">(123) 456-7890</P>
+            </div>
+            <div class="col-sm-4">
+                <h3>Dirección</h3>
+                <P class="text-muted">Calle Manifestacion 23</P>
+            </div>
         </div>
+    </div>
+    <div class="bg-white text-dark text-center border-top wow fadeIn">
+        <p class="mb-0 py-3 text-muted small">&copy; Copyright <script>document.write(new Date().getFullYear())</script> Made with <i class="ti-heart text-danger"></i> By <a href="http://google.com">RestResv</a></p>
+    </div>
+    
 
     </body>
 
 </html>
+<?php 
+if(isset($_POST['registrarse'])){
+    $nombre=$_POST['nombre'];
+    $correo=$_POST['correo'];
+    $telefono=$_POST['telefono'];
+    $turno=$_POST['turno'];
+    $numero=$_POST['numero'];
+    $fecha =date("d-m-Y", strtotime($_POST['fecha']));
+    $fecha2 =date("Y-m-d", strtotime($fecha));
+    $estado='Espera';
+   
+   
+   
+    $insertarDatos = "INSERT INTO reservas VALUES (null, '$nombre','$correo', '$telefono', '$turno', '$numero', '$fecha2', '$estado', NULL)";
+
+    $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
+    
+    if(!$ejecutarInsertar){
+        echo"fallo sql";
+        
+    }else{
+        
+    }
+}
+
+?>
+

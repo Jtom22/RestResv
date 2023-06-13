@@ -14,6 +14,9 @@
 
 <html>
 
+<?php 
+   
+     ?>
     <head>
 
         <meta charset="utf-8">
@@ -36,9 +39,7 @@
                     <div class="col-sm-4" id="TituloForm">
                         El_Palacio
                     </div>
-                    <div class="col-sm-4">
-                        <img src="../\IconoRestaurante.png" id="icono">
-                    </div>
+                   
                     
                 </div>
 
@@ -53,7 +54,7 @@
             
 
                 <div id="part1">
-                    <form method="POST" action="#" id="form">
+                    <form method="POST" id="form">
                         <div class="cajaFormulario">
                             <div id="formulario">
                                 <div id="formulario1">
@@ -92,7 +93,7 @@
 
                         </div>
                         
-
+ 
 
                     </form>
 
@@ -106,32 +107,36 @@
 
 
         </div>
-        <div id="footer">
 
-                
-            
-            <div class="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h3>Nuestra web</h3>
-                        <P class="text-muted">info@website.com</P>
-                    </div>
-                    <div class="col-sm-4">
-                        <h3>Número de telefono</h3>
-                        <P class="text-muted">(123) 456-7890</P>
-                    </div>
-                    <div class="col-sm-4">
-                        <h3>Dirección</h3>
-                        <P class="text-muted">12345 Fake ST NoWhere AB Country</P>
-                    </div>
-                </div>
-                
-           
+        <div id="footer">
+          
+        <div class="container-fluid bg-dark text-light has-height-md middle-items text-center wow fadeIn">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Redes</h3>
+                <p><span class="ti-location-pin pr-3"></span> https://twitter.com/El_Palacio</p>
+                <p><span class="ti-support pr-3"></span> https://www.facebook.com/El_Palacio</p>
+                <p><span class="ti-email pr-3"></span>info@website.com</p>
+            </div>
+            <div class="col-sm-4">
+                <h3>Número de teléfono</h3>
+                <P class="text-muted">(123) 456-7890</P>
+            </div>
+            <div class="col-sm-4">
+                <h3>Dirección</h3>
+                <P class="text-muted">Calle Manifestacion 23</P>
+            </div>
         </div>
+    </div>
+    <div class="bg-white text-dark text-center border-top wow fadeIn">
+        <p class="mb-0 py-3 text-muted small">&copy; Copyright <script>document.write(new Date().getFullYear())</script> Made with <i class="ti-heart text-danger"></i> By <a href="http://google.com">RestResv</a></p>
+    </div>
+    
 
     </body>
 
 </html>
+
 <?php 
 if(isset($_POST['registrarse'])){
     $nombre=$_POST['nombre'];
@@ -144,17 +149,33 @@ if(isset($_POST['registrarse'])){
     $estado='Espera';
     $idcliente=$_POST['id_cliente'];
    
-   
-    $insertarDatos = "INSERT INTO reservas VALUES (null, '$nombre','$correo', '$telefono', '$turno', '$numero', '$fecha2', '$estado', '33')";
+   if(!empty($nombre) || !empty($correo)|| !empty($telefono)|| !empty($turno)|| !empty($numero)|| !empty($fecha2)){
+        $insertarDatos = "INSERT INTO reservas VALUES (null, '$nombre','$correo', '$telefono', '$turno', '$numero', '$fecha2', '$estado', '33')";
 
-    $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
-    
-    if(!$ejecutarInsertar){
-        echo"fallo sql";
+        $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
         
-    }else{
-        
+        if(!$ejecutarInsertar){
+            echo '<p>fallo sql</p>';
+            die;
+        }else{
+            $aviso==true;
+            aviso($aviso);
     }
+   }else{
+  
+
+   }
+
+}
+function aviso($aviso){
+
+    if ($aviso==true) {
+        echo'<script type="text/javascript">
+        alert("Tarea Guardada");
+        window.location.href="FormularioC.php";
+        </script>';
+    }
+  
 }
 
 ?>

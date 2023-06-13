@@ -97,14 +97,7 @@ colors{
 
     
 }
-#footer{
-    height: fit-content;
-    background-color: rgb(38, 42, 44);
-    text-align: center;
-    color:white;
-    height: 10vh;
-   
-}
+
 #TituloForm{
     font-size: 8rem;
     font-family:fantasy;
