@@ -78,7 +78,7 @@
                                     
         
                                     <label for="exampleFormControlInput1" class="form-label">Fecha</label>
-                                    <input class="form-control" type="text" placeholder="17/04/23" aria-label="default input example" name="fecha">
+                                    <input class="form-control" type="text" placeholder="17-04-23" aria-label="default input example" name="fecha">
         
                                     <label for="exampleFormControlInput1" class="form-label">Numero de turno</label>
                                     <input class="form-control" type="text" placeholder="1 o 2" aria-label="default input example" name="turno">
@@ -136,46 +136,112 @@
     </body>
 
 </html>
+<?php 
+    if(isset($_POST['registrarse'])){
+        $usuario=$_POST['telefono'];
+        $contraseña=$_POST['correo'];
+        $id_cliente;
+        $consulta ="SELECT * from clientes where usuario='$usuario'";
 
+        $res = $enlace->query($consulta);
+
+        if ($res->num_rows > 0) {
+        //existe usuario
+            while($row = $res->fetch_assoc()) {
+                $id_cliente=$row["usuario"];
+                
+            }
+            $nombre=$_POST['nombre'];
+            $correo=$_POST['correo'];
+            $telefono=$_POST['telefono'];
+            $turno=$_POST['turno'];
+            $numero=$_POST['numero'];
+            $fecha =date("d-m-Y", strtotime($_POST['fecha']));
+            $fecha2 =date("Y-m-d", strtotime($fecha));
+            $estado='Espera';
+            if(!empty($nombre) || !empty($correo)|| !empty($telefono)|| !empty($turno)|| !empty($numero)|| !empty($fecha2)){
+                    $insertarDatos = "INSERT INTO reservas VALUES (null, '$nombre','$correo', '$telefono', '$turno', '$numero', '$fecha2', '$estado', '$id_cliente')";
+
+                    $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
+                    
+                    if(!$ejecutarInsertar){
+                        echo '<p>fallo sql</p>';
+                        die;
+                    }else{
+                       
+                    }
+            }else{
+            
+
+            }
+           
+        } else {
+            //no existe usuario
+            if(!empty($usuario) || !empty($contraseña)){
+                
+               
+                $insertarDatos = "INSERT INTO clientes VALUES (null, '$usuario','$contraseña')";
+
+                $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
+                
+                if(!$ejecutarInsertar){
+                    echo '<p>fallo sql</p>';
+                    die;
+                }else{
+                    $usuario=$_POST['telefono'];
+                    $contraseña=$_POST['correo'];
+                   
+                    $consulta ="SELECT * from clientes where usuario='$usuario'";
+
+                    $res = $enlace->query($consulta);
+                    
+                    $id_cliente;
+                    if ($res->num_rows > 0) {
+                        while($row = $res->fetch_assoc()) {
+                            $id_cliente=$row["usuario"];
+
+                        }
+                        $nombre=$_POST['nombre'];
+                        $correo=$_POST['correo'];
+                        $telefono=$_POST['telefono'];
+                        $turno=$_POST['turno'];
+                        $numero=$_POST['numero'];
+                        $fecha =date("d-m-Y", strtotime($_POST['fecha']));
+                        $fecha2 =date("Y-m-d", strtotime($fecha));
+                        $estado='Espera';
+                        if(!empty($nombre) || !empty($correo)|| !empty($telefono)|| !empty($turno)|| !empty($numero)|| !empty($fecha2)){
+                                $insertarDatos = "INSERT INTO reservas VALUES (null, '$nombre','$correo', '$telefono', '$turno', '$numero', '$fecha2', '$estado', '$id_cliente')";
+        
+                                $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
+                                
+                                if(!$ejecutarInsertar){
+                                    echo '<p>fallo sql</p>';
+                                    die;
+                                }else{
+                                 
+                                }
+                        }else{
+                        
+        
+                        }
+                        
+                    }else{
+                    
+
+                    }
+                    }
+            }   
+    }
+}
+
+ 
+    
+?>
 <?php 
 if(isset($_POST['registrarse'])){
-    $nombre=$_POST['nombre'];
-    $correo=$_POST['correo'];
-    $telefono=$_POST['telefono'];
-    $turno=$_POST['turno'];
-    $numero=$_POST['numero'];
-    $fecha =date("d-m-Y", strtotime($_POST['fecha']));
-    $fecha2 =date("Y-m-d", strtotime($fecha));
-    $estado='Espera';
-    $idcliente=$_POST['id_cliente'];
-   
-   if(!empty($nombre) || !empty($correo)|| !empty($telefono)|| !empty($turno)|| !empty($numero)|| !empty($fecha2)){
-        $insertarDatos = "INSERT INTO reservas VALUES (null, '$nombre','$correo', '$telefono', '$turno', '$numero', '$fecha2', '$estado', '33')";
-
-        $ejecutarInsertar = mysqli_query($enlace, $insertarDatos);
-        
-        if(!$ejecutarInsertar){
-            echo '<p>fallo sql</p>';
-            die;
-        }else{
-            $aviso==true;
-            aviso($aviso);
-    }
-   }else{
-  
-
-   }
+    
 
 }
-function aviso($aviso){
 
-    if ($aviso==true) {
-        echo'<script type="text/javascript">
-        alert("Tarea Guardada");
-        window.location.href="FormularioC.php";
-        </script>';
-    }
-  
-}
 
 ?>
